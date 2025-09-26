@@ -256,7 +256,7 @@ jobs:
         id: depends
         run: |
           sudo apt-get update
-          sudo apt-get install build-essential libcurl4-openssl-dev
+          sudo apt-get install -y build-essential libcurl4-openssl-dev
 
       - name: Build
         id: cmake_build
