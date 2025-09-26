@@ -26,7 +26,7 @@ jobs:
 
       - name: Setup ccache
         run: |
-          mkdir -p $HOME/.ccache
+          mkdir -p $HOME/.ccache $HOME/ccache_debug
           ccache -M 5G -d $HOME/.ccache
           export CCACHE_LOGFILE=/home/runneruser/ccache_debug/ccache.log
           export CCACHE_DEBUGDIR="/home/runneruser/ccache_debug"
