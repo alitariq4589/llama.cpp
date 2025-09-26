@@ -156,7 +156,7 @@ jobs:
             -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
             -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
             -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=BOTH \
-
+            \
             -DLLAMA_FATAL_WARNINGS=ON \
             -DGGML_RPC=ON \
             -DCMAKE_C_COMPILER=riscv64-linux-gnu-gcc-14 \
