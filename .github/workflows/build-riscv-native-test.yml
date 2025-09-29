@@ -214,8 +214,6 @@ jobs:
             -DLLAMA_BUILD_EXAMPLES=ON \
             -DLLAMA_BUILD_TOOLS=ON \
             -DLLAMA_BUILD_TESTS=OFF \
-            -DCMAKE_SYSTEM_NAME=Linux \
-            -DCMAKE_SYSTEM_PROCESSOR=riscv64 \
             -DCMAKE_C_COMPILER_LAUNCHER=ccache \
             -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
             -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
