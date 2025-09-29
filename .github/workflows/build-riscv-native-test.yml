@@ -184,7 +184,13 @@ jobs:
       - name: Clone
         id: checkout
         uses: actions/checkout@v4
-
+      
+      - name: Dependencies
+        id: depends
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libcurl4-openssl-dev wget ccache
+          gcc --version
       - name: Setup ccache
         run: |
           mkdir -p $HOME/.ccache $HOME/ccache_debug
@@ -196,12 +202,7 @@ jobs:
           echo "CCACHE_DEBUGDIR=$CCACHE_DEBUGDIR" >> $GITHUB_ENV
           echo "CCACHE_BASEDIR=$GITHUB_WORKSPACE" >> $GITHUB_ENV
           echo "CCACHE_DIR=$HOME/.ccache" >> $GITHUB_ENV
-      - name: Dependencies
-        id: depends
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential libcurl4-openssl-dev wget
-          gcc --version
+      
 
       - name: Build
         id: cmake_build
