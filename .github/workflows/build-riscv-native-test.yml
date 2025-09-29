@@ -158,7 +158,7 @@ jobs:
             -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=BOTH \
             \
             \ # -DLLAMA_FATAL_WARNINGS=ON \
-            \# -DGGML_RPC=ON \
+            \# -DGGML_RPC=ON
           cmake --build build --config Release -j $(nproc)
 
       - name: Test
