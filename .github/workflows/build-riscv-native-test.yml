@@ -155,9 +155,9 @@ jobs:
             -DCMAKE_FIND_ROOT_PATH=/usr/lib/riscv64-linux-gnu \
             -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
             -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
-            -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=BOTH 
+            -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=BOTH \
             
-             # -DLLAMA_FATAL_WARNINGS=ON 
+            -DLLAMA_FATAL_WARNINGS=ON 
             # -DGGML_RPC=ON
           cmake --build build --config Release -j $(nproc)
 
