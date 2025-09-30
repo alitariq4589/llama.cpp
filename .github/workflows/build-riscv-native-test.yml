@@ -1445,7 +1445,7 @@ jobs:
 #           LLAMA_ARG_THREADS=$(nproc) GG_BUILD_LOW_PERF=1 bash ./ci/run.sh ./tmp/results ./tmp/mnt
 
   ggml-ci-riscv64-native-cpu-low-perf:
-    runs-on: ubuntu-22.04-arm
+    runs-on: RISCV64
 
     steps:
       - name: Clone
@@ -1502,7 +1502,7 @@ jobs:
 #           LLAMA_ARG_THREADS=$(nproc) bash ./ci/run.sh ./tmp/results ./tmp/mnt
 
   ggml-ci-riscv64-native-cpu-high-perf:
-    runs-on: ubuntu-22.04
+    runs-on: RISCV64
 
     steps:
       - name: Clone
