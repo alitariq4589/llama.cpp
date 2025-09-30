@@ -356,6 +356,56 @@ jobs:
 #           cd build
 #           ctest -L main --verbose --timeout 900
 
+
+  debian-trixie-llguidance-riscv64-native:
+    runs-on: RISCV64
+
+    steps:
+      - name: Clone
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Dependencies
+        id: depends
+        run: |
+          sudo apt-get update
+          sudo apt-get install build-essential libcurl4-openssl-dev
+
+      - name: Build
+        id: cmake_build
+        run: |
+          mkdir build
+          cd build
+          cmake .. \
+            -DLLAMA_CURL=OFF \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DGGML_OPENMP=OFF \
+            -DLLAMA_BUILD_EXAMPLES=ON \
+            -DLLAMA_BUILD_TOOLS=ON \
+            -DLLAMA_BUILD_TESTS=OFF \
+            -DCMAKE_SYSTEM_NAME=Linux \
+            -DCMAKE_SYSTEM_PROCESSOR=riscv64 \
+            -DCMAKE_C_COMPILER=riscv64-linux-gnu-gcc-14 \
+            -DCMAKE_CXX_COMPILER=riscv64-linux-gnu-g++-14 \
+            -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+            -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+            -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+            -DCMAKE_FIND_ROOT_PATH=/usr/lib/riscv64-linux-gnu \
+            -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
+            -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
+            -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=BOTH \
+            \#-DLLAMA_FATAL_WARNINGS=ON \
+            -DLLAMA_LLGUIDANCE=ON
+          cmake --build . --config Release -j $(nproc)
+
+      - name: Test
+        id: cmake_test
+        run: |
+          cd build
+          ctest -L main --verbose --timeout 900
+
+
+
 #   ubuntu-latest-cmake-rpc:
 #     runs-on: ubuntu-latest
 
@@ -390,6 +440,65 @@ jobs:
 #         run: |
 #           cd build
 #           ctest -L main --verbose
+
+
+  debian-trixie-cmake-rpc-riscv64-native:
+    runs-on: RISCV64
+
+    continue-on-error: true
+
+    steps:
+      - name: Clone
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup ccache
+        run: |
+          mkdir -p $HOME/.ccache $HOME/ccache_debug
+          ccache -M 5G -d $HOME/.ccache
+          export CCACHE_LOGFILE=/home/runneruser/ccache_debug/ccache.log
+          export CCACHE_DEBUGDIR="/home/runneruser/ccache_debug"
+          echo "$GITHUB_WORKSPACE"
+          echo "CCACHE_LOGFILE=$CCACHE_LOGFILE" >> $GITHUB_ENV
+          echo "CCACHE_DEBUGDIR=$CCACHE_DEBUGDIR" >> $GITHUB_ENV
+          echo "CCACHE_BASEDIR=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+          echo "CCACHE_DIR=$HOME/.ccache" >> $GITHUB_ENV
+
+      - name: Dependencies
+        id: depends
+        run: |
+          sudo apt-get update
+          sudo apt-get install build-essential libcurl4-openssl-dev
+
+      - name: Build
+        id: cmake_build
+        run: |
+          cmake -B build \
+            -DLLAMA_CURL=OFF \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DGGML_OPENMP=OFF \
+            -DLLAMA_BUILD_EXAMPLES=ON \
+            -DLLAMA_BUILD_TOOLS=ON \
+            -DLLAMA_BUILD_TESTS=OFF \
+            -DCMAKE_SYSTEM_NAME=Linux \
+            -DCMAKE_SYSTEM_PROCESSOR=riscv64 \
+            -DCMAKE_C_COMPILER=riscv64-linux-gnu-gcc-14 \
+            -DCMAKE_CXX_COMPILER=riscv64-linux-gnu-g++-14 \
+            -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+            -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+            -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+            -DCMAKE_FIND_ROOT_PATH=/usr/lib/riscv64-linux-gnu \
+            -DCMAKE_FIND_ROOT_PATH_MODE_PROGRAM=NEVER \
+            -DCMAKE_FIND_ROOT_PATH_MODE_LIBRARY=ONLY \
+            -DCMAKE_FIND_ROOT_PATH_MODE_INCLUDE=BOTH \
+            -DGGML_RPC=ON
+          cmake --build build --config Release -j $(nproc)
+
+      - name: Test
+        id: cmake_test
+        run: |
+          cd build
+          ctest -L main --verbose
 
 #   ubuntu-22-cmake-vulkan:
 #     runs-on: ubuntu-22.04
@@ -1335,6 +1444,38 @@ jobs:
 #         run: |
 #           LLAMA_ARG_THREADS=$(nproc) GG_BUILD_LOW_PERF=1 bash ./ci/run.sh ./tmp/results ./tmp/mnt
 
+  ggml-ci-riscv64-native-cpu-low-perf:
+    runs-on: ubuntu-22.04-arm
+
+    steps:
+      - name: Clone
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup ccache
+        run: |
+          mkdir -p $HOME/.ccache $HOME/ccache_debug
+          ccache -M 5G -d $HOME/.ccache
+          export CCACHE_LOGFILE=/home/runneruser/ccache_debug/ccache.log
+          export CCACHE_DEBUGDIR="/home/runneruser/ccache_debug"
+          echo "$GITHUB_WORKSPACE"
+          echo "CCACHE_LOGFILE=$CCACHE_LOGFILE" >> $GITHUB_ENV
+          echo "CCACHE_DEBUGDIR=$CCACHE_DEBUGDIR" >> $GITHUB_ENV
+          echo "CCACHE_BASEDIR=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+          echo "CCACHE_DIR=$HOME/.ccache" >> $GITHUB_ENV
+
+      - name: Dependencies
+        id: depends
+        run: |
+          sudo apt-get update
+          sudo apt-get install build-essential libcurl4-openssl-dev
+
+      - name: Test
+        id: ggml-ci
+        run: |
+          LLAMA_ARG_THREADS=$(nproc) GG_BUILD_LOW_PERF=1 bash ./ci/run.sh ./tmp/results ./tmp/mnt
+
+
 #   ggml-ci-x64-cpu-high-perf:
 #     runs-on: ubuntu-22.04
 
@@ -1359,6 +1500,36 @@ jobs:
 #         id: ggml-ci
 #         run: |
 #           LLAMA_ARG_THREADS=$(nproc) bash ./ci/run.sh ./tmp/results ./tmp/mnt
+
+  ggml-ci-riscv64-native-cpu-high-perf:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Clone
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup ccache
+        run: |
+          mkdir -p $HOME/.ccache $HOME/ccache_debug
+          ccache -M 5G -d $HOME/.ccache
+          export CCACHE_LOGFILE=/home/runneruser/ccache_debug/ccache.log
+          export CCACHE_DEBUGDIR="/home/runneruser/ccache_debug"
+          echo "$GITHUB_WORKSPACE"
+          echo "CCACHE_LOGFILE=$CCACHE_LOGFILE" >> $GITHUB_ENV
+          echo "CCACHE_DEBUGDIR=$CCACHE_DEBUGDIR" >> $GITHUB_ENV
+          echo "CCACHE_BASEDIR=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+          echo "CCACHE_DIR=$HOME/.ccache" >> $GITHUB_ENV
+      - name: Dependencies
+        id: depends
+        run: |
+          sudo apt-get update
+          sudo apt-get install build-essential libcurl4-openssl-dev
+
+      - name: Test
+        id: ggml-ci
+        run: |
+          LLAMA_ARG_THREADS=$(nproc) bash ./ci/run.sh ./tmp/results ./tmp/mnt
 
 #   ggml-ci-arm64-cpu-high-perf:
 #     runs-on: ubuntu-22.04-arm
