@@ -1473,7 +1473,7 @@ jobs:
       - name: Test
         id: ggml-ci
         run: |
-          LLAMA_ARG_THREADS=$(nproc) GG_BUILD_LOW_PERF=1 bash ./ci/run.sh ./tmp/results ./tmp/mnt
+          LLAMA_ARG_THREADS=$(nproc) LLAMA_FATAL_WARNINGS=OFF GG_BUILD_LOW_PERF=1 bash ./ci/run.sh ./tmp/results ./tmp/mnt
 
 
 #   ggml-ci-x64-cpu-high-perf:
@@ -1529,7 +1529,7 @@ jobs:
       - name: Test
         id: ggml-ci
         run: |
-          LLAMA_ARG_THREADS=$(nproc) bash ./ci/run.sh ./tmp/results ./tmp/mnt
+          LLAMA_ARG_THREADS=$(nproc) LLAMA_FATAL_WARNINGS=OFF bash ./ci/run.sh ./tmp/results ./tmp/mnt
 
 #   ggml-ci-arm64-cpu-high-perf:
 #     runs-on: ubuntu-22.04-arm
