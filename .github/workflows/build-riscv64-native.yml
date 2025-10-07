@@ -1,4 +1,4 @@
-name: CI
+name: RISC-V RVV1.0 CI - Native
 
 on:
   workflow_dispatch: # allows manual triggering
