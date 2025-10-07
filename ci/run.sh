@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+set -x
+
 #
 # sample usage:
 #
