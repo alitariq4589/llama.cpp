@@ -330,13 +330,10 @@ jobs:
     runs-on: RISCV64
 
     steps:
-<<<<<<< HEAD
       - name: Install Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y git-lfs
-=======
->>>>>>> 6a6a7a3c0455bf8b7ffbba122c489be5492cee8a
       - name: Clone
         id: checkout
         uses: actions/checkout@v4
