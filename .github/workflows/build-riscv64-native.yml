@@ -369,7 +369,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y git-lfs
+          sudo apt-get install -y git-lfs python3.13-dev
 
       - name: Clone
         id: checkout
