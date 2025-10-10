@@ -330,6 +330,10 @@ jobs:
     runs-on: RISCV64
 
     steps:
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git-lfs
       - name: Clone
         id: checkout
         uses: actions/checkout@v4
@@ -355,12 +359,18 @@ jobs:
       - name: Test
         id: ggml-ci
         run: |
+          git lfs install
           LLAMA_ARG_THREADS=$(nproc) LLAMA_FATAL_WARNINGS=OFF GG_BUILD_LOW_PERF=1 bash ./ci/run.sh ./tmp/results ./tmp/mnt
 
   ggml-ci-riscv64-native-cpu-high-perf:
     runs-on: RISCV64
 
     steps:
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git-lfs
+
       - name: Clone
         id: checkout
         uses: actions/checkout@v4
@@ -385,4 +395,5 @@ jobs:
       - name: Test
         id: ggml-ci
         run: |
+          git lfs install
           LLAMA_ARG_THREADS=$(nproc) LLAMA_FATAL_WARNINGS=OFF bash ./ci/run.sh ./tmp/results ./tmp/mnt
