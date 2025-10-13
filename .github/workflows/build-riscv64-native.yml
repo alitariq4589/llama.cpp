@@ -369,7 +369,9 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y git-lfs python3.13-dev
+          sudo apt-get install -y git-lfs python3.13-dev rustup
+          python3 -m pip install transformers
+          rustup update stable
 
       - name: Clone
         id: checkout
