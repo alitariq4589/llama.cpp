@@ -233,8 +233,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential libcurl4-openssl-dev rustup python3-pip
-          python3 -m pip install transformers
-          rustup update stable
 
       - name: Build
         id: cmake_build
