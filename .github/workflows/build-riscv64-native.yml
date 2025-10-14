@@ -372,9 +372,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y git-lfs python3.13-dev rustup python3-pip
-          python3 -m pip install transformers --break-system-packages
           rustup update stable
           rustup default stable
+          python3 -m pip install transformers --break-system-packages
 
       - name: Clone
         id: checkout
