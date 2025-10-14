@@ -373,6 +373,7 @@ jobs:
           rustup update stable
           rustup default stable
           python3 -m pip install transformers --break-system-packages
+          export PATH="$HOME/.local/bin:$PATH"
 
       - name: Clone
         id: checkout
