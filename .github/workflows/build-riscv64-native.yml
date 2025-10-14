@@ -232,7 +232,7 @@ jobs:
         id: depends
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential libcurl4-openssl-dev cargo rustup python3-pip
+          sudo apt-get install -y build-essential libcurl4-openssl-dev rustup python3-pip
           python3 -m pip install transformers
           rustup update stable
 
@@ -374,6 +374,7 @@ jobs:
           sudo apt-get install -y git-lfs python3.13-dev rustup python3-pip
           python3 -m pip install transformers --break-system-packages
           rustup update stable
+          rustup default stable
 
       - name: Clone
         id: checkout
