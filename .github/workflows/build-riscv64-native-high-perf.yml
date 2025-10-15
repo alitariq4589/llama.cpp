@@ -63,7 +63,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y git-lfs python3.13-dev rustup python3-pip
+          sudo apt-get install -y git-lfs python3.13-dev rustup python3-pip libjpeg-dev zlib1g-dev libpng-dev libtiff-dev libopenjp2-7-dev
           rustup update stable
           rustup default stable
           python3 -m pip install transformers --break-system-packages
