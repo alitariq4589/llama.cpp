@@ -1,4 +1,4 @@
-name: RISC-V RVV1.0 CI - Native
+name: RISC-V RVV1.0 High Perf - Native
 
 on:
   workflow_dispatch: # allows manual triggering
