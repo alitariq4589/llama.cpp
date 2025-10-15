@@ -26,6 +26,8 @@
 # GG_BUILD_KLEIDIAI=1 bash ./ci/run.sh ./tmp/results ./tmp/mnt
 #
 
+set +x
+
 if [ -z "$2" ]; then
     echo "usage: $0 <output-dir> <mnt-dir>"
     exit 1
