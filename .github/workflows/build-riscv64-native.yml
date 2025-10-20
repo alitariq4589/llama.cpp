@@ -232,7 +232,13 @@ jobs:
         id: depends
         run: |
           sudo apt-get update
+<<<<<<< HEAD
           sudo apt-get install -y build-essential libcurl4-openssl-dev cargo
+=======
+          sudo apt-get install -y build-essential libcurl4-openssl-dev cargo rustup python3-pip
+          python3 -m pip install transformers
+          rustup update stable
+>>>>>>> f3e05a12d253f72d1ab0dbec9a86ae82eff09fd4
 
       - name: Build
         id: cmake_build
@@ -369,8 +375,13 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
+<<<<<<< HEAD
           sudo apt-get install -y git-lfs python3.13-dev rustup
           python3 -m pip install transformers
+=======
+          sudo apt-get install -y git-lfs python3.13-dev rustup python3-pip
+          python3 -m pip install transformers --break-system-packages
+>>>>>>> f3e05a12d253f72d1ab0dbec9a86ae82eff09fd4
           rustup update stable
 
       - name: Clone
