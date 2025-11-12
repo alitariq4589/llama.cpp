@@ -230,7 +230,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y cmake ccache build-essential libcurl4-openssl-dev rustup python3-pip
-
+          rustup install stable
+          rustup default stable
       - name: Build
         id: cmake_build
         run: |
