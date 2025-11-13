@@ -150,6 +150,11 @@ jobs:
           sudo apt-get install -y cmake ccache build-essential libcurl4-openssl-dev
       - name: Setup ccache
         run: |
+          STEP_ID="cmake-sanitizer-riscv64-native"
+          echo "Step ID: ${STEP_ID}"
+          ccache -M 3G
+          echo "CCACHE_NAMESPACE=${STEP_ID}" >> $GITHUB_ENV
+
           mkdir -p $HOME/.ccache $HOME/ccache_debug
           ccache -M 5G -d $HOME/.ccache
           export CCACHE_LOGFILE=/home/runneruser/ccache_debug/ccache.log
@@ -288,6 +293,11 @@ jobs:
           sudo apt-get install -y cmake ccache build-essential libcurl4-openssl-dev
       - name: Setup ccache
         run: |
+          STEP_ID="cmake-rpc-riscv64-native"
+          echo "Step ID: ${STEP_ID}"
+          ccache -M 3G
+          echo "CCACHE_NAMESPACE=${STEP_ID}" >> $GITHUB_ENV
+
           mkdir -p $HOME/.ccache $HOME/ccache_debug
           ccache -M 5G -d $HOME/.ccache
           export CCACHE_LOGFILE=/home/runneruser/ccache_debug/ccache.log
@@ -342,6 +352,11 @@ jobs:
 
       - name: Setup ccache
         run: |
+          STEP_ID="native-cpu-low-perf"
+          echo "Step ID: ${STEP_ID}"
+          ccache -M 3G
+          echo "CCACHE_NAMESPACE=${STEP_ID}" >> $GITHUB_ENV
+
           mkdir -p $HOME/.ccache $HOME/ccache_debug
           ccache -M 5G -d $HOME/.ccache
           export CCACHE_LOGFILE=/home/runneruser/ccache_debug/ccache.log
