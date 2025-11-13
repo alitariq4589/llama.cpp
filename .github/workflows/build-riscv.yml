@@ -71,7 +71,7 @@ jobs:
           sudo apt-get install -y cmake build-essential libcurl4-openssl-dev wget ccache
       - name: Setup ccache
         run: |
-          STEP_ID=$(echo "${{ github.step }}" | tr ' /' '_')
+          STEP_ID="cpu-cmake-rv64-native"
           echo "Step ID: ${STEP_ID}"
           ccache -M 3G
           echo "CCACHE_NAMESPACE=${STEP_ID}" >> $GITHUB_ENV
