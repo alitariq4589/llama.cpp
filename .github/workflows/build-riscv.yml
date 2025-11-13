@@ -71,6 +71,11 @@ jobs:
           sudo apt-get install -y cmake build-essential libcurl4-openssl-dev wget ccache
       - name: Setup ccache
         run: |
+          STEP_ID=$(echo "${{ github.step }}" | tr ' /' '_')
+          echo "Step ID: ${STEP_ID}"
+          ccache -M 3G
+          echo "CCACHE_NAMESPACE=${STEP_ID}" >> $GITHUB_ENV
+          
           mkdir -p $HOME/.ccache $HOME/ccache_debug
           ccache -M 5G -d $HOME/.ccache
           export CCACHE_LOGFILE=/home/runneruser/ccache_debug/ccache.log
