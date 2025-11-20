@@ -60,6 +60,10 @@ jobs:
 
     runs-on: RISCV64
 
+    strategy:
+      matrix:
+        run_number: [1, 2, 3, 4, 5]
+
     steps:
       - name: Clone
         id: checkout
@@ -142,6 +146,7 @@ jobs:
       matrix:
         sanitizer: [ADDRESS, THREAD, UNDEFINED]
         build_type: [Debug]
+        run_number: [1, 2, 3, 4, 5]
 
     steps:
       - name: Clone
@@ -221,6 +226,10 @@ jobs:
   debian-trixie-llguidance-riscv64-native:
     runs-on: RISCV64
 
+    strategy:
+      matrix:
+        run_number: [1, 2, 3, 4, 5]
+
     steps:
       - name: Clone
         id: checkout
@@ -282,6 +291,10 @@ jobs:
 
     continue-on-error: true
 
+    strategy:
+      matrix:
+        run_number: [1, 2, 3, 4, 5]
+
     steps:
       - name: Clone
         id: checkout
@@ -337,6 +350,10 @@ jobs:
   
   ggml-ci-riscv64-native-cpu-low-perf:
     runs-on: RISCV64
+
+    strategy:
+      matrix:
+        run_number: [1, 2, 3, 4, 5]
 
     steps:
       - name: Install Dependencies
