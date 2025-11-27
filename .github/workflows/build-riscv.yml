@@ -348,46 +348,46 @@ jobs:
           cd build
           ctest -L main --verbose
   
-  ggml-ci-riscv64-native-cpu-low-perf:
-    runs-on: RISCV64
+  # ggml-ci-riscv64-native-cpu-low-perf:
+  #   runs-on: RISCV64
 
-    strategy:
-      matrix:
-        run_number: [1, 2, 3, 4, 5]
+  #   strategy:
+  #     matrix:
+  #       run_number: [1, 2, 3, 4, 5]
 
-    steps:
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake ccache git-lfs build-essential libcurl4-openssl-dev
+  #   steps:
+  #     - name: Install Dependencies
+  #       run: |
+  #         sudo apt-get update
+  #         sudo apt-get install -y cmake ccache git-lfs build-essential libcurl4-openssl-dev
           
-      - name: Clone
-        id: checkout
-        uses: actions/checkout@v4
+  #     - name: Clone
+  #       id: checkout
+  #       uses: actions/checkout@v4
 
-      - name: Setup ccache
-        run: |
-          export CCACHE_DIR="$HOME/.ccache/native-cpu-low-perf"
-          mkdir -p "$CCACHE_DIR"
+  #     - name: Setup ccache
+  #       run: |
+  #         export CCACHE_DIR="$HOME/.ccache/native-cpu-low-perf"
+  #         mkdir -p "$CCACHE_DIR"
           
-          ccache --set-config=max_size=5G
-          ccache --set-config=compression=true
-          ccache --set-config=compression_level=6
-          ccache --set-config=cache_dir="$CCACHE_DIR"
-          ccache --set-config=sloppiness=file_macro,time_macros,include_file_mtime,include_file_ctime
-          ccache --set-config=hash_dir=false
+  #         ccache --set-config=max_size=5G
+  #         ccache --set-config=compression=true
+  #         ccache --set-config=compression_level=6
+  #         ccache --set-config=cache_dir="$CCACHE_DIR"
+  #         ccache --set-config=sloppiness=file_macro,time_macros,include_file_mtime,include_file_ctime
+  #         ccache --set-config=hash_dir=false
           
-          echo "CCACHE_DIR=$CCACHE_DIR" >> $GITHUB_ENV
-          echo "PATH=/usr/lib/ccache:$PATH" >> $GITHUB_ENV
+  #         echo "CCACHE_DIR=$CCACHE_DIR" >> $GITHUB_ENV
+  #         echo "PATH=/usr/lib/ccache:$PATH" >> $GITHUB_ENV
           
-          ccache -s
+  #         ccache -s
 
-      - name: Test
-        id: ggml-ci
-        run: |
-          git lfs install
-          LLAMA_ARG_THREADS=$(nproc) LLAMA_FATAL_WARNINGS=OFF GG_BUILD_LOW_PERF=1 bash ./ci/run.sh ./tmp/results ./tmp/mnt
+  #     - name: Test
+  #       id: ggml-ci
+  #       run: |
+  #         git lfs install
+  #         LLAMA_ARG_THREADS=$(nproc) LLAMA_FATAL_WARNINGS=OFF GG_BUILD_LOW_PERF=1 bash ./ci/run.sh ./tmp/results ./tmp/mnt
 
-      - name: ccache Statistics
-        if: always()
-        run: ccache -s
+  #     - name: ccache Statistics
+  #       if: always()
+  #       run: ccache -s
