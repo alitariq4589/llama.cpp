@@ -65,6 +65,10 @@ jobs:
         run_number: [1, 2, 3, 4, 5]
 
     steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libatomic1
       - name: Clone
         id: checkout
         uses: actions/checkout@v4
@@ -149,6 +153,10 @@ jobs:
         run_number: [1, 2, 3, 4, 5]
 
     steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libatomic1
       - name: Clone
         id: checkout
         uses: actions/checkout@v4
@@ -231,6 +239,11 @@ jobs:
         run_number: [1, 2, 3, 4, 5]
 
     steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libatomic1
+
       - name: Clone
         id: checkout
         uses: actions/checkout@v4
@@ -296,6 +309,10 @@ jobs:
         run_number: [1, 2, 3, 4, 5]
 
     steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libatomic1
       - name: Clone
         id: checkout
         uses: actions/checkout@v4
