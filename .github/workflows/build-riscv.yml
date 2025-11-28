@@ -68,7 +68,9 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libatomic1 libtsan2
+          sudo apt-get install -y libatomic1 libtsan2 gcc-14 g++-14
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
       - name: Clone
         id: checkout
         uses: actions/checkout@v4
@@ -78,7 +80,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y cmake build-essential libcurl4-openssl-dev wget ccache
-          
+      
+      - name: GCC version check
+        run: |
+          gcc --version
+          g++ --version
       - name: Setup ccache
         run: |
           # Set unique cache directory for this job
@@ -156,7 +162,14 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libatomic1 libtsan2
+          sudo apt-get install -y libatomic1 libtsan2 gcc-14 g++-14
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
+      
+      - name: GCC version check
+        run: |
+          gcc --version
+          g++ --version
       - name: Clone
         id: checkout
         uses: actions/checkout@v4
@@ -242,8 +255,14 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libatomic1 libtsan2
-
+          sudo apt-get install -y libatomic1 libtsan2 gcc-14 g++-14
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
+      
+      - name: GCC version check
+        run: |
+          gcc --version
+          g++ --version
       - name: Clone
         id: checkout
         uses: actions/checkout@v4
@@ -312,7 +331,14 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libatomic1 libtsan2
+          sudo apt-get install -y libatomic1 libtsan2 gcc-14 g++-14
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
+      
+      - name: GCC version check
+        run: |
+          gcc --version
+          g++ --version
       - name: Clone
         id: checkout
         uses: actions/checkout@v4
