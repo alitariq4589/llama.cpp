@@ -277,7 +277,7 @@ jobs:
           sudo apt-get update
 
           # Install necessary packages
-          sudo apt-get install -y libatomic1 libtsan2 gcc-14 g++-14 rustup
+          sudo apt-get install -y libatomic1 libtsan2 gcc-14 g++-14 rustup cmake ccache build-essential libcurl4-openssl-dev python3-pip
           
           # Set gcc-14 and g++-14 as the default compilers
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
@@ -294,14 +294,6 @@ jobs:
       - name: Clone
         id: checkout
         uses: actions/checkout@v4
-
-      - name: Dependencies
-        id: depends
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake ccache build-essential libcurl4-openssl-dev rustup python3-pip
-          rustup install stable
-          rustup default stable
           
       - name: Setup ccache
         run: |
