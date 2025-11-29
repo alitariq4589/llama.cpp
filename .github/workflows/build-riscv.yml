@@ -71,6 +71,8 @@ jobs:
           # Set gcc-14 and g++-14 as the default compilers
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
+          sudo ln -sf /usr/bin/gcc-14 /usr/bin/gcc
+          sudo ln -sf /usr/bin/g++-14 /usr/bin/g++
           
           # Install Rust stable version
           rustup install stable
@@ -176,6 +178,8 @@ jobs:
           # Set gcc-14 and g++-14 as the default compilers
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
+          sudo ln -sf /usr/bin/gcc-14 /usr/bin/gcc
+          sudo ln -sf /usr/bin/g++-14 /usr/bin/g++
           
           # Install Rust stable version
           rustup install stable
@@ -267,11 +271,13 @@ jobs:
           sudo apt-get update
 
           # Install necessary packages
-          sudo apt-get install -y libatomic1 libtsan2 gcc-14 g++-14 rustup cmake ccache build-essential libcurl4-openssl-dev python3-pip
+          sudo apt-get install -y libatomic1 libtsan2 gcc-14 g++-14 rustup
           
           # Set gcc-14 and g++-14 as the default compilers
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
+          sudo ln -sf /usr/bin/gcc-14 /usr/bin/gcc
+          sudo ln -sf /usr/bin/g++-14 /usr/bin/g++
           
           # Install Rust stable version
           rustup install stable
@@ -344,6 +350,8 @@ jobs:
           # Set gcc-14 and g++-14 as the default compilers
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
+          sudo ln -sf /usr/bin/gcc-14 /usr/bin/gcc
+          sudo ln -sf /usr/bin/g++-14 /usr/bin/g++
           
           # Install Rust stable version
           rustup install stable
