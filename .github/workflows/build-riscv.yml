@@ -56,7 +56,7 @@ env:
 
 jobs:
 
-  debian-cpu-cmake-rv64-native:
+  ubuntu-cpu-cmake-rv64-native:
 
     runs-on: RISCV64
 
@@ -159,7 +159,7 @@ jobs:
           ./bin/llama-convert-llama2c-to-ggml --copy-vocab-from-model ./tok512.bin --llama2c-model stories260K.bin --llama2c-output-model stories260K.gguf
           ./bin/llama-cli -m stories260K.gguf -p "One day, Lily met a Shoggoth" -n 500 -c 256
 
-  debian-trixie-cmake-sanitizer-riscv64-native:
+  ubuntu-cmake-sanitizer-riscv64-native:
     runs-on: RISCV64
 
     continue-on-error: true
@@ -269,7 +269,7 @@ jobs:
           ctest -L main --verbose --timeout 900
 
 
-  debian-trixie-llguidance-riscv64-native:
+  ubuntu-llguidance-riscv64-native:
     runs-on: RISCV64
     steps:
       - name: Install dependencies
@@ -342,7 +342,7 @@ jobs:
           ctest -L main --verbose --timeout 900
 
 
-  debian-trixie-cmake-rpc-riscv64-native:
+  ubuntu-cmake-rpc-riscv64-native:
     runs-on: RISCV64
 
     continue-on-error: true
@@ -422,47 +422,3 @@ jobs:
         run: |
           cd build
           ctest -L main --verbose
-  
-  # ggml-ci-riscv64-native-cpu-low-perf:
-  #   runs-on: RISCV64
-
-  #   strategy:
-  #     matrix:
-  #       run_number: [1, 2, 3, 4, 5]
-
-  #   steps:
-  #     - name: Install Dependencies
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y cmake ccache git-lfs build-essential libcurl4-openssl-dev
-          
-  #     - name: Clone
-  #       id: checkout
-  #       uses: actions/checkout@v4
-
-  #     - name: Setup ccache
-  #       run: |
-  #         export CCACHE_DIR="$HOME/.ccache/native-cpu-low-perf"
-  #         mkdir -p "$CCACHE_DIR"
-          
-  #         ccache --set-config=max_size=5G
-  #         ccache --set-config=compression=true
-  #         ccache --set-config=compression_level=6
-  #         ccache --set-config=cache_dir="$CCACHE_DIR"
-  #         ccache --set-config=sloppiness=file_macro,time_macros,include_file_mtime,include_file_ctime
-  #         ccache --set-config=hash_dir=false
-          
-  #         echo "CCACHE_DIR=$CCACHE_DIR" >> $GITHUB_ENV
-  #         echo "PATH=/usr/lib/ccache:$PATH" >> $GITHUB_ENV
-          
-  #         ccache -s
-
-  #     - name: Test
-  #       id: ggml-ci
-  #       run: |
-  #         git lfs install
-  #         LLAMA_ARG_THREADS=$(nproc) LLAMA_FATAL_WARNINGS=OFF GG_BUILD_LOW_PERF=1 bash ./ci/run.sh ./tmp/results ./tmp/mnt
-
-  #     - name: ccache Statistics
-  #       if: always()
-  #       run: ccache -s
